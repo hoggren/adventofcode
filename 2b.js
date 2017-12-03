@@ -20,14 +20,13 @@ const readFile = util.promisify(fs.readFile);
         for (let i = 0; i < row.length; i++) {
             const x = row[i];
 
-            let dividablePair = row
+            let dividablePairs = row
                 .map(y => (((x > y) ? x : y) % ((x <= y) ? x : y) === 0 && y !== x) ? [x, y] : undefined)
                 .filter(x => x !== undefined);
 
-            if (dividablePair.length > 0) {
-                let max = dividablePair[0].reduce((prev, cur) => Math.max(prev, cur));
-                let min = dividablePair[0].reduce((prev, cur) => Math.min(prev, cur));
-                res = max / min;
+            if (dividablePairs.length === 1) {
+                const pair = [].concat.apply([], dividablePairs);
+                res = Math.max.apply(null, pair) / Math.min.apply(null, pair);
                 break;
             };
         }
