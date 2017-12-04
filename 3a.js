@@ -3,7 +3,7 @@ const nearest = (n, arr) => {
     return closest;
 };
 
-const input = 21;//277678;
+const input = 277678;
 
 const corner = Math.pow(Math.ceil(Math.sqrt(input)), 2);
 const cornerLower = Math.pow(Math.ceil(Math.sqrt(input)) - 1, 2);
