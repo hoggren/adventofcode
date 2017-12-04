@@ -4,18 +4,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
-            "type": "shell",
-            "command": "echo Hello"
-        },
-        {
             "label": "lint",
             "command": "eslint",
             "type": "shell",
             "args": [
                 "${file}",
                 "-c",
-                "${workspaceFolder}/.eslintrc.json"
+                "${workspaceFolder}/.eslintrc.json",
+                "--quiet"
             ],
             "presentation": {
                 "echo": false,
