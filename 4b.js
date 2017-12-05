@@ -5,8 +5,8 @@ const readFile = util.promisify(fs.readFile);
 
 (async () => {
     const SortedWordEnumerator = function* (rows, char) {
-        for (let i = 0; i < rows.length; i++) {
-            const out = rows[i].split(char).map(x => x.split('').sort().reduce((a, b) => a + b, ''));
+        for (const row of rows) {
+            const out = row.split(char).map(x => x.split('').sort().reduce((a, b) => a + b, ''));
             yield out;
         }
     };
@@ -24,7 +24,7 @@ const readFile = util.promisify(fs.readFile);
     };
 
     let input = await readFile('./4a.bin', 'ascii');
-    
+
     const passwords = input.split('\r\n');
     const anagramDupes = countAnagrams(passwords);
 
