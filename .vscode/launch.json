@@ -8,8 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch current file",
-            "program": "${file}",
-            "preLaunchTask": "lint"
+            "program": "${file}"
         }
     ]
 }
