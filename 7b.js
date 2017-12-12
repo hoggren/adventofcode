@@ -8,14 +8,18 @@ const calcTowerWeight = (above, sum = 0) => {
         return sum;
 
     let objAbove = toObj(above);
+    const plates = objAbove
+        .map(x => toObj(x.above))
+        .map(x => x.reduce((acc, cur) => acc += cur.weight, 0));
+
+    // objAbove.forEach(x => {
+    //     sums.push(calcTowerWeight(x.above, 0));
+    // });
+
     let nextAbove = objAbove.reduce((acc, val) => acc.concat(val.above), []);
 
     sum += objAbove.reduce((acc, val, i, a) => acc += val.weight, 0);
     let diffs = objAbove.filter(x => x.weight !== objAbove[0].weight);
-
-    if(diffs.length > 0) {
-        console.log(objAbove);
-    }
 
     return calcTowerWeight(nextAbove, sum);
 };
@@ -46,12 +50,30 @@ const objArr = [];
         }
     }
 
-    let weight = [];
+    let nextLevel = [bottom];
+    let even = false;
+    while (!even) {
+        let weight = [];
 
-    bottom.above.forEach((x, i) => {
-        weight[i] = calcTowerWeight([x]);
-    });
+        nextLevel.forEach((a, i) => {
+            weight[i] = [];
+            a.above.forEach((b, k) => {
+                weight[i][k] = calcTowerWeight([b]);
+            });
+        });
+        // nextLevel.above.forEach((x, i) => {
+        //     weight[i] = calcTowerWeight([x]);
+        // });
 
-    let diff = weight.reduce((acc, val) => acc = acc > val ? val : acc, Infinity);
-    console.log(weight, diff);
+
+        let min = Math.min(...weight);
+        let max = Math.max(...weight);
+
+        even = min === max;
+        // let diff = weight.filter(x => x === min).length < weight.filter(x => x === max).length ? min : max;
+        nextLevel = nextLevel
+    }
+
+    // console.log(weight, diff);
+    console.log('x');
 })();
